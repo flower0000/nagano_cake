@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
   devise_for :admins, controllers: {
-  sessions:      'admins/sessions',
+  sessions:      'admins/sessions',#コントローラーを示している．右辺青部は階層。controllerフォルダ内のcustomersフォルダのsessions.controller.rbを通してルーティングしてあげる風に変更．
   passwords:     'admins/passwords',
   registrations: 'admins/registrations'
 }
 
   devise_for :customers, controllers: {
-  sessions:      'customers/sessions', #コントローラーを示している．右辺青部は階層。controllerフォルダ内のcustomersフォルダのsessions.controller.rbを通してルーティングしてあげる風に変更．
+  sessions:      'customers/sessions',
   passwords:     'customers/passwords',
   registrations: 'customers/registrations'
 }

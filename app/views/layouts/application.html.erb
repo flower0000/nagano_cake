@@ -29,21 +29,43 @@
   <!--listタグの点（リストマーカー）を削除するにはlist-unstyledを追加する-->
   <!--mb-3でmarginのbottom部に3の大きさの隙間が入る感じ-->
          <li class="navbar-brand p-8 btn btn-outline-dark">
-           マイページ
+           <%= link_to "マイページ", maypage_path %>
          </li>
 
+         <li class="navbar-brand p-8 btn btn-outline-dark">
+           <%= link_to "商品一覧", items_path %>
+         </li>
+
+         <li class="navbar-brand p-8 btn btn-outline-dark">
+           <%= link_to "カート", cart_items_path %>
+         </li>
+
+         <li class="navbar-brand p-8 btn btn-outline-dark">
+           <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
+         </li>
+        </ul>
+
+      <% elsif admin_signed_in? %>
+        <ul class="navbar-nav ml-auto list-unstyled mb-3">
+  <!--listタグの点（リストマーカー）を削除するにはlist-unstyledを追加する-->
+  <!--mb-3でmarginのbottom部に3の大きさの隙間が入る感じ-->
          <li class="navbar-brand p-8 btn btn-outline-dark">
            商品一覧
          </li>
 
          <li class="navbar-brand p-8 btn btn-outline-dark">
-           カート
+           会員一覧
          </li>
 
          <li class="navbar-brand p-8 btn btn-outline-dark">
-           ログアウト
+           注文履歴一覧
+         </li>
+
+         <li class="navbar-brand p-8 btn btn-outline-dark">
+           <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
          </li>
         </ul>
+
       <% else %>
         <ul class="navbar-nav ml-auto list-unstyled mb-3">
   <!--ml-auto（左寄せ等の移動はnavbar-navもセットで覚える）-->
