@@ -2,6 +2,11 @@ class ApplicationController < ActionController::Base
   
 #deviseのストロングパラメーター設定
  before_action :configure_permitted_parameters, if: :devise_controller?
+ 
+ 
+ #customer側ログイン後ログアウト後ページ遷移先入力
+ 
+ #admin側ログイン後ログアウト後ページ遷移先入力
 
   protected
 

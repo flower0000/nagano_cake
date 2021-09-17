@@ -22,66 +22,65 @@
      <div class="container">
       <%= link_to "LOGO", root_path, class:"navbar-brand p-8 text-dark" %>
       <!--navbar-brandはサイト名を作成するときに使用するclass。左上に配置される感じ？-->
-      <!--navbar-brandとクラスを入力することで、親要素のnavタグのnavbar-darkが適用される-->
 
        <% if customer_signed_in? %>
-        <ul class="navbar-nav ml-auto list-unstyled mb-3">
+        <ul class="navbar-nav ml-auto list-unstyled">
   <!--listタグの点（リストマーカー）を削除するにはlist-unstyledを追加する-->
   <!--mb-3でmarginのbottom部に3の大きさの隙間が入る感じ-->
-         <li class="navbar-brand p-8 btn btn-outline-dark">
+         <li class="my-4 ml-4 p-8 btn btn-outline-dark">
            <%= link_to "マイページ", maypage_path %>
          </li>
 
-         <li class="navbar-brand p-8 btn btn-outline-dark">
+         <li class="my-4 ml-4 p-8 btn btn-outline-dark">
            <%= link_to "商品一覧", items_path %>
          </li>
 
-         <li class="navbar-brand p-8 btn btn-outline-dark">
+         <li class="my-4 ml-4 p-8 btn btn-outline-dark">
            <%= link_to "カート", cart_items_path %>
          </li>
 
-         <li class="navbar-brand p-8 btn btn-outline-dark">
+         <li class="my-4 ml-4 p-8 btn btn-outline-dark">
            <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
          </li>
         </ul>
 
       <% elsif admin_signed_in? %>
-        <ul class="navbar-nav ml-auto list-unstyled mb-3">
+        <ul class="navbar-nav ml-auto list-unstyled">
   <!--listタグの点（リストマーカー）を削除するにはlist-unstyledを追加する-->
   <!--mb-3でmarginのbottom部に3の大きさの隙間が入る感じ-->
-         <li class="navbar-brand p-8 btn btn-outline-dark">
+         <li class="my-4 ml-4 p-8 btn btn-outline-dark">
            商品一覧
          </li>
 
-         <li class="navbar-brand p-8 btn btn-outline-dark">
+         <li class="my-4 ml-4 p-8 btn btn-outline-dark">
            会員一覧
          </li>
 
-         <li class="navbar-brand p-8 btn btn-outline-dark">
+         <li class="my-4 ml-4 p-8 btn btn-outline-dark">
            注文履歴一覧
          </li>
 
-         <li class="navbar-brand p-8 btn btn-outline-dark">
-           <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+         <li class="my-4 ml-4 p-8 btn btn-outline-dark">
+           <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"text-dark" %>
          </li>
         </ul>
 
       <% else %>
-        <ul class="navbar-nav ml-auto list-unstyled mb-3">
-  <!--ml-auto（左寄せ等の移動はnavbar-navもセットで覚える）-->
-         <li class="navbar-brand p-8 btn btn-outline-dark">
+        <ul class="navbar-nav ml-auto list-unstyled">
+  <!--ml-auto（左寄せ等の移動はnavbar-navもセット使うので覚える）-->
+         <li class="my-4 ml-4 p-8 btn btn-outline-dark">
            About
          </li>
 
-         <li class="navbar-brand p-8 btn btn-outline-dark">
+         <li class="my-4 ml-4 p-8 btn btn-outline-dark">
           商品一覧
          </li>
 
-         <li class="navbar-brand p-8 btn btn-outline-dark">
+         <li class="my-4 ml-4 p-8 btn btn-outline-dark">
            新規登録
          </li>
 
-         <li class="navbar-brand p-8 btn btn-outline-dark">
+         <li class="my-4 ml-4 p-8 btn btn-outline-dark">
            ログイン
          </li>
         </ul>
