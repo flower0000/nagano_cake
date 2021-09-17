@@ -1,1 +1,29 @@
 <!--商品登録画面-->
+<div class="container">
+
+  <div class="row">
+    <div>商品新規登録</div>
+  </div>
+
+  <div class="row">
+    <div class="mx-auto">
+      <%= form_with model: @item, local:true do |f| %>
+        <h6>商品画像</h6>
+        <%= f.attachment_field :image %> <!--image_idだが画像入力時は_idは取り除いて入力-->
+
+        <h6>商品名</h6>
+        <%= f.text_field :name %>
+
+        <h6>商品説明</h6>
+        <%= f.text_area :introduction %>
+
+        <h6>税抜き価格</h6>
+        <%= f.text_field :price %>円
+
+        <br><%= f.submit '新規登録', class: "mt-3 btn btn-success" %></br>
+      <% end %>
+    </div>
+
+  </div>
+
+</div>
