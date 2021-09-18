@@ -1,0 +1,36 @@
+<!--管理者側商品一覧-->
+<div class="container">
+
+ <!--商品一覧-->
+  <div class="col-8 mx-auto">
+  <h2><div>商品一覧</div></h2>
+
+   <table class="table table-hover">
+     <thead><!--表のヘッダー-->
+       <tr>
+        <th class="header1">商品ID</th>
+        <th class="header2">商品名</th>
+        <th class="header3">税抜き価格</th>
+       </tr>
+     </thead>
+
+     <tbody><!--商品ごとのデータをtabeleで並べていく-->
+      <% @items.each do |item| %>
+       <tr>
+        <td><%= item.id %></td><!--商品IDのデータ-->
+
+        <td>
+          <%= link_to admin_item_path(item.id) do %>
+            <%= item.name %>
+          <% end %>
+        </td><!--商品名のデータ-->
+
+        <td><%= item.price %></td><!--税抜き価格のデータ-->
+       </tr>
+      <% end %>
+     </tbody>
+
+   </table>
+
+  </div>
+</div>

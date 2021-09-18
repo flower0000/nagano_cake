@@ -35,12 +35,9 @@ Rails.application.routes.draw do
   post '/cart_items' => 'cart_items#create', as: 'cart_items_create'
 
   #ordersコントローラー用
-  get '/orders/new' => 'orders#new', as: 'orders_new'
   post '/orders/check' => 'orders#check', as: 'orders_check'
   get '/orders/thanks' => 'orders#thanks', as: 'thanks'
-  post '/orders' => 'orders#create', as: 'orders_create'
-  get '/orders' => 'orders#index', as: 'orders_index'
-  get '/orders/:id' => 'orders#show', as: 'orders_show'
+  resources :orders, only: [:new, :create, :index, :show]
 
  #管理者側コントローラー
  namespace :admin do
