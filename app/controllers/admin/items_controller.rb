@@ -32,14 +32,17 @@ class Admin::ItemsController < ApplicationController
 
 
   def edit
-
+    @item = Item.find(params[:id])
+    #製品詳細のデータを取得
   end
 
 
 
 
   def update
-
+    @item = Item.find(params[:id])
+    @item.update(item_params)
+    redirect_to admin_item_path(@item.id)
   end
 
   def item_params
