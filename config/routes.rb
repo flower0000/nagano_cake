@@ -41,7 +41,9 @@ Rails.application.routes.draw do
 
  #管理者側コントローラー
  namespace :admin do
+   get '/' => 'homes#top', as: ''
    resources :items, only:[:index, :create, :new, :edit, :show, :update]
+   resources :customers, only:[:index, :show, :edit, :update]
  end
 
 end

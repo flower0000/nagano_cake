@@ -1,0 +1,36 @@
+<!--管理者側会員一覧-->
+<div class="container">
+
+ <!--商品一覧-->
+  <div class="col-8 mx-auto">
+  <h4>会員一覧</h4>
+
+   <table class="table table-hover">
+     <thead><!--表のヘッダー-->
+       <tr>
+        <th class="header1">会員ID</th>
+        <th class="header2">氏名</th>
+        <th class="header3">メールアドレス</th>
+       </tr>
+     </thead>
+
+     <tbody><!--会員ごとのデータをtabeleで並べていく-->
+      <% @customers.each do |customer| %>
+       <tr>
+        <td><%= customer.id %></td><!--会員IDのデータ-->
+
+        <td>
+          <%= link_to admin_customer_path(customer.id) do %>
+            <%= customer.last_name %><%= customer.first_name %>
+          <% end %>
+        </td><!--氏名のデータ-->
+
+        <td><%= customer.email %></td><!--メールアドレスのデータ-->
+       </tr>
+      <% end %>
+     </tbody>
+
+   </table>
+
+  </div>
+</div>
