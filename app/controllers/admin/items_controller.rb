@@ -45,8 +45,12 @@ class Admin::ItemsController < ApplicationController
     redirect_to admin_item_path(@item.id)
   end
 
+private
+
   def item_params
     params.require(:item).permit(:image_id, :name, :introduction, :price)
+    #ここで入力するのはform_withから送られてきたデータで保存したいものだけ（入力欄にあってもここに対応するカラムが無ければ保存されない）
   end
+  #paramsはparameterの略で，モデルというよりかはデータのまとまり．その中のpermit(・・・)←・・・のカラムに入っているデータを抜き出して使用できる状態にする．
 
 end

@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   resources :items, only: [:index, :show]
 
   #customersコントローラー用
-  get '/customers/mypage' => 'customers#show', as: 'maypage'
+  get '/customers/mypage' => 'customers#show', as: 'mypage'
   get '/customers/edit' => 'customers#edit', as: 'customers_edit'
   patch 'customers' => 'customers#update', as: 'customers_update'
   get '/customers/check' => 'customers#check', as: 'customers_check'
@@ -41,7 +41,8 @@ Rails.application.routes.draw do
 
  #管理者側コントローラー
  namespace :admin do
-   get '/' => 'homes#top', as: ''
+   #get '/' => 'homes#top', as: '' 名前付きルートadmin_pathにしたければこれでも
+   root to: 'homes#top'
    resources :items, only:[:index, :create, :new, :edit, :show, :update]
    resources :customers, only:[:index, :show, :edit, :update]
  end
