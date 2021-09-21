@@ -5,7 +5,7 @@ class CustomersController < ApplicationController
   end
 
   def edit
-
+    @customer = current_user
   end
 
   def update
@@ -17,7 +17,12 @@ class CustomersController < ApplicationController
   end
 
   def withdrawal
-
+    @customer = current_customer
+    @user.update(is_active: false)
+    #is_activeカラムの値を変更(defaultはtrueに設定)
+    reset_session
+    #ログアウトさせる(強制的にログアウト)
+    redirect_to root_path
   end
 
 end
