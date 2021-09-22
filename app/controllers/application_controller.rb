@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
     case resource
     when Admin
-      admin_path#pathは設定したい遷移先へのpathを指定(resourceの中身がAdminならここに遷移)
+      admin_root_path#pathは設定したい遷移先へのpathを指定(resourceの中身がAdminならここに遷移)
     when Customer
       mypage_path#ここもpathはご自由に変更可能(Customerならこっちに遷移)
     end

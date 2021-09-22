@@ -28,19 +28,19 @@
   <!--listタグの点（リストマーカー）を削除するにはlist-unstyledを追加する-->
   <!--mb-3でmarginのbottom部に3の大きさの隙間が入る感じ-->
          <li class="my-4 ml-4 p-8 btn btn-outline-dark">
-           <%= link_to "マイページ", mypage_path %>
+           <%= link_to "マイページ", mypage_path, class:"text-dark" %>
          </li>
 
          <li class="my-4 ml-4 p-8 btn btn-outline-dark">
-           <%= link_to "商品一覧", items_path %>
+           <%= link_to "商品一覧", items_path, class:"text-dark" %>
          </li>
 
          <li class="my-4 ml-4 p-8 btn btn-outline-dark">
-           <%= link_to "カート", cart_items_path %>
+           <%= link_to "カート", cart_items_path, class:"text-dark" %>
          </li>
 
          <li class="my-4 ml-4 p-8 btn btn-outline-dark">
-           <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
+           <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class:"text-dark" %>
          </li>
         </ul>
 
@@ -49,15 +49,15 @@
   <!--listタグの点（リストマーカー）を削除するにはlist-unstyledを追加する-->
   <!--mb-3でmarginのbottom部に3の大きさの隙間が入る感じ-->
          <li class="my-4 ml-4 p-8 btn btn-outline-dark">
-           商品一覧
+           <%= link_to "商品一覧", admin_items_path, class:"text-dark" %>
          </li>
 
          <li class="my-4 ml-4 p-8 btn btn-outline-dark">
-           会員一覧
+           <%= link_to "会員一覧", admin_customers_path, class:"text-dark" %>
          </li>
 
          <li class="my-4 ml-4 p-8 btn btn-outline-dark">
-           注文履歴一覧
+           <%= link_to "注文履歴一覧", admin_root_path, class:"text-dark" %>
          </li>
 
          <li class="my-4 ml-4 p-8 btn btn-outline-dark">
@@ -69,15 +69,15 @@
         <ul class="navbar-nav ml-auto list-unstyled">
   <!--ml-auto（左寄せ等の移動はnavbar-navもセット使うので覚える）-->
          <li class="my-4 ml-4 p-8 btn btn-outline-dark">
-           About
+          <%= link_to "About", about_path, class:"text-dark" %>
          </li>
 
          <li class="my-4 ml-4 p-8 btn btn-outline-dark">
-          商品一覧
+          <%= link_to "商品一覧", items_path, class:"text-dark" %>
          </li>
 
          <li class="my-4 ml-4 p-8 btn btn-outline-dark">
-           新規登録
+           <%= link_to "新規登録", new_customer_registration_path, class:"text-dark" %>
          </li>
 
          <li class="my-4 ml-4 p-8 btn btn-outline-dark">
