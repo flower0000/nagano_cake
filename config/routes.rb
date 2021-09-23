@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
   #customersコントローラー用
   get '/customers/mypage' => 'customers#show', as: 'mypage'
-  get '/customers/edit' => 'customers#edit', as: 'customers_edit'
+  get '/customers/edit/data' => 'customers#edit', as: 'customers_edit' #edit_customer_registration_pathとURLがかぶるため/customers/edit→/customers/edit/dataに変更
   patch 'customers' => 'customers#update', as: 'customers_update'
   get '/customers/check' => 'customers#check', as: 'customers_check'
   patch '/customers/withdrawal' => 'customers#withdrawal', as: 'withdrawal'

@@ -1,1 +1,18 @@
 <!--ユーザー側商品一覧-->
+<div class="container">
+  <h2 class="my-3">商品一覧</h2><!--ここに商品の総数が表示されるようにする-->
+  <div class="row">
+    <% @items.each do |item| %>
+      <div class="col-lg-3">
+        <div>
+          <%= link_to item_path(item.id) do %>
+            <%= attachment_image_tag item, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:'100x100' %>
+          <% end %>
+        </div>
+        <div><%= item.name %></div>
+        <div><%= item.price %></div>
+      </div>
+    <% end %>
+    <%= paginate @items %>
+  </div>
+</div>

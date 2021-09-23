@@ -1,0 +1,18 @@
+<!--Customer側商品詳細画面-->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+      <%= attachment_image_tag item, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:'100x100' %>
+    </div>
+
+
+<!--以下カート機能を質問-->
+    <div class="col-lg-8">
+<!--注文部-->
+      <%= form_with model: @Cart_item, url: cart_items_create_path, local:true do |f| %>
+        <%= f.hidden_field :name value: @item.name %>
+        <br><%= f.select :amount, *[1..9] %><%= f.submit 'カートに入れる', class: "mt-3 btn btn-success" %></br>
+      <% end %>
+    </div>
+  </div>
+</div>
