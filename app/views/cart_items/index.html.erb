@@ -1,23 +1,24 @@
 <div class="container">
 
-  <div class="row">
+  <div class="row my-3">
     <div class="col-lg-3">
       <h4>ショッピングカート</h4>
     </div>
     <div class="col-lg-9">
-      <div>
-        <%= link_to "カートを空にする", cart_items_destroy_all_path, class:"text-right btn btn-danger" %> <!--右詰めにして表示-->
+      <div class="text-right">
+        <%= link_to "カートを空にする", cart_items_destroy_all_path, class:"btn btn-danger" %> <!--右詰めにして表示-->
       </div>
     </div>
   </div>
 
   <div class="row">
-    <table class="table table-hover">
-     <thead><!--表のヘッダー-->
+    <table class="table table-hover table-bordered ">
+     <thead style="background-color: silver;"><!--表のヘッダー-->
        <tr>
         <th class="header1">商品名</th>
         <th class="header2">単価(税込み)</th>
-        <th class="header3">小計</th>
+        <th class="header3">数量</th>
+        <th class="header4">小計</th>
         <th></th><!--なぜここがこれで１つ分余白ができる？→1個分の項目の空きスペース(入れ物が)が何も入力しないthタグを入れることでできるため-->
        </tr>
      </thead>
@@ -45,13 +46,12 @@
           <%= (cart_item.item.price * 1.1).floor *cart_item.amount %><!--単価（税込み）。.floorとつけることで端数を切り捨てする-->
         </td>
 
-        <td>
-           <% @total +=  (cart_item.item.price * 1.1).floor * cart_item.amount %><!--@totalに繰り返し処理の分だけ金額が加算されていく．表記しないから%=ではなく%で記述-->
+        <% @total +=  (cart_item.item.price * 1.1).floor * cart_item.amount %><!--@totalに繰り返し処理の分だけ金額が加算されていく．表記しないから%=ではなく%で記述-->
+
+        <td class="text-center">
+          <%= link_to "削除する", cart_items_destroy_path(cart_item.id), class:"btn btn-danger" %><!--商品削除ボタン-->
         </td>
 
-        <td>
-          <%= link_to "削除する", cart_items_destroy_path(cart_item.id), class:"btn btn-success" %><!--商品削除ボタン-->
-        </td>
        </tr>
       <% end %>
      </tbody>
@@ -60,27 +60,31 @@
   </div>
 
   <div class="row">
-    <table>
-      <tr>
+    <div class="col-lg-3">
+      <%= link_to "買い物を続ける", items_path, class:"mt-1 btn btn-primary" %>
+    </div>
 
-        <td>
-          <%= link_to "買い物を続ける", items_path, class:"btn btn-primary" %>
-        </td>
+    <div class="col-lg-9">
+      <table class="table table-bordered">
+        <tr>
 
-        <td>
-          合計金額
-        </td>
+          <td style="background-color: silver;">
+            合計金額
+          </td>
 
-        <td>
-          <%= @total %>
-        </td>
+          <td>
+            <%= @total %>
+          </td>
 
-      </tr>
-    </table>
+        </tr>
+      </table>
+    </div>
   </div>
 
   <div class="row text-center">
-    <%= link_to "情報入力に進む",  new_order_path, class:"btn btn-primary" %>
+    <div class="col-lg-12">
+      <%= link_to "情報入力に進む",  new_order_path, class:"btn btn-success" %>
+    </div>
   </div>
 
 </div>
