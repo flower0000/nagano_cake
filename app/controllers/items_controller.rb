@@ -9,15 +9,9 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
-    @cart_item = Cart_item.new
-  end
-
-
-#ストロングパラメータの設定を確認
-  private
-
-  def cart_item_params
-    params.require(:item).permit(:item.id, :amount)
+    @cart_item = CartItem.new 
+    #モデルの記述は_を無くし，_後を大文字にして
+    #Cart_itemモデル内にデータを保存する用のスペースを作ってあげる．コントローラー名と違うモデルでも問題なくできる
   end
 
 end
