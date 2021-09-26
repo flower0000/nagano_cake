@@ -48,7 +48,7 @@ class CartItemsController < ApplicationController
       #find_by(item_id: @cart_item.item_id)→find_by(item_id: params[:cart_item][:items_id])
       #飛ばされてきたデータ　params[:cart_item]。この中のitem_idを探す。
 
-      #ストロングパラメータ（フォームから送られてきた値）をデータを探すときにそのまま使用できる
+      #ストロングパラメータ（フォームから送られてきた値）はデータを探すときにそのまま使用できる
 
       cart_item = current_customer.cart_items.find_by(item_id: @cart_item.item_id)
       #ログインしているユーザーの全カートアイテム情報から，見つけたいデータ(item_id)を指定して、@cart_item.item_id(同じ商品id)を持つデータが無いか検索する．

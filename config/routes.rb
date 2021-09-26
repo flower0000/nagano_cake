@@ -5,12 +5,6 @@ Rails.application.routes.draw do
   registrations: 'admins/registrations'
 }
 
-  devise_for :customers, controllers: {
-  sessions:      'customers/sessions',
-  passwords:     'customers/passwords',
-  registrations: 'customers/registrations'
-}
-
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   #homesコントローラー用
@@ -46,5 +40,14 @@ Rails.application.routes.draw do
    resources :items, only:[:index, :create, :new, :edit, :show, :update]
    resources :customers, only:[:index, :show, :edit, :update]
  end
+ 
+ 
+  devise_for :customers, controllers: {
+  #他のルーティングと被るため、間違って呼び出されないよう下に配置する。（ルーティングは上から順番に適用されていくため被る場合且つ使用しなければ下に配置することで解決）
+  sessions:      'customers/sessions',
+  passwords:     'customers/passwords',
+  registrations: 'customers/registrations'
+}
+ 
 
 end
