@@ -6,7 +6,7 @@
     </div>
     <div class="col-lg-9">
       <div class="text-right">
-        <%= link_to "カートを空にする", cart_items_destroy_all_path, class:"btn btn-danger" %> <!--右詰めにして表示-->
+        <%= link_to "カートを空にする", cart_items_destroy_all_path, method: :delete, class:"btn btn-danger" %> <!--右詰めにして表示-->
       </div>
     </div>
   </div>
@@ -31,25 +31,27 @@
         </td>
 
         <td>
-           <%= cart_item.item.price %>
+           <%= cart_item.item.with_tax_price %><!--単価（税込み）。モデルにメソッドを記載して呼び出している。-->
+           <%#= (cart_item.item.price * 1.1).floor %><!--view内でのみ計算を完結させる場合はこの表記でも可能-->
         </td>
 
         <td>
           <%= form_with model: cart_item, url: cart_items_update_path(cart_item.id), local:true do |f| %>
             <%= f.hidden_field :item_id, value: cart_item.item.id %><!--cart_itemモデルに結び付いたアイテムモデルからid情報を取得-->
             <%= f.hidden_field :customer_id, value: current_customer.id %>
-            <br><%= f.select :amount, *[1..9] %><%= f.submit '保存', class: "ml-2 btn btn-success" %></br>
+            <%= f.select :amount, *[1..9] %><%= f.submit '保存', class: "ml-2 btn btn-success" %>
           <% end %>
         </td>
 
         <td>
-          <%= (cart_item.item.price * 1.1).floor *cart_item.amount %><!--単価（税込み）。.floorとつけることで端数を切り捨てする-->
+          <%= cart_item.subtotal %><!--小計。モデルにメソッドを記載して呼び出している。-->
+          <%#= (cart_item.item.price * 1.1).floor * cart_item.amount %><!--view内でのみ計算を完結させる場合はこの表記でも可能-->
         </td>
 
         <% @total +=  (cart_item.item.price * 1.1).floor * cart_item.amount %><!--@totalに繰り返し処理の分だけ金額が加算されていく．表記しないから%=ではなく%で記述-->
 
         <td class="text-center">
-          <%= link_to "削除する", cart_items_destroy_path(cart_item.id), class:"btn btn-danger" %><!--商品削除ボタン-->
+          <%= link_to "削除する", cart_items_destroy_path(cart_item.id), method: :delete, class:"btn btn-danger" %><!--商品削除ボタン-->
         </td>
 
        </tr>

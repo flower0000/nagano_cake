@@ -3,7 +3,7 @@
   <div class="row mt-">
 
     <div class="col-lg-4">
-      <%= attachment_image_tag @item, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:'100x100' %>
+      <%= attachment_image_tag @item, :image, :fill, 100, 100, format: "jpeg", fallback: "no_image.jpg", size:"100x100" %>
     </div>
 <!--以下カート機能を-->
     <div class="col-lg-8">
@@ -14,7 +14,7 @@
       <%= form_with model: @cart_item, url: cart_items_create_path, local:true do |f| %>
         <%= f.hidden_field :item_id, value: @item.id %><!--入力せずにほしいデータを送る方法-->
         <%= f.hidden_field :customer_id, value: current_customer.id %>
-        <br><%= f.select :amount, *[1..9] %><%= f.submit 'カートに入れる', class: "ml-2 btn btn-success" %></br>
+        <br><%= f.select :amount, *[1..9], prompt: "個数選択" %><%= f.submit "カートに入れる", class: "ml-2 btn btn-success" %></br>
       <% end %>
     </div>
 
