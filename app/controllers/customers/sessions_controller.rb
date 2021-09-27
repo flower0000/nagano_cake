@@ -37,6 +37,9 @@ class Customers::SessionsController < Devise::SessionsController
     if @customer#if文に変数名だけが入力されている場合は値が入っていればtrue,なければfalseを返す
 
       if (@customer.valid_password?(params[:customer][:password]) && (@customer.active_for_authentication? == false))
+        #@customerのパスワードと入力されたパスワードの値が正しい且、@customerのactive_for_authentication? メソッドの値がfalseであればという条件分岐
+        #active_for_authentication? はcustomerモデルに記載されているためそれを@customerのactive_for_authentication?で呼び出している
+
         flash[:error] = "退会済みです。"
         redirect_to new_customer_session_path
       end
