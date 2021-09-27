@@ -6,4 +6,10 @@ class Customer < ApplicationRecord
 
    has_many :cart_items, dependent: :destroy
    has_many :orders, dependent: :destroy
+   
+  def active_for_authentication?
+    super && (self.is_active == true)
+    #ログインしているユーザーのis_activeの状態がtrueであればtrueを値として返す。
+  end
+  
 end

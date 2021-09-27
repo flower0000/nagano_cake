@@ -20,7 +20,7 @@ class CustomersController < ApplicationController
 
   def withdrawal
     @customer = current_customer
-    @user.update(is_active: false)
+    @customer.update(is_active: false)
     #is_activeカラムの値を変更(defaultはtrueに設定)
     reset_session
     #ログアウトさせる(強制的にログアウト)

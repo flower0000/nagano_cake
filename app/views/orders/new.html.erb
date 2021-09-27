@@ -1,11 +1,11 @@
 <div class="container">
   <div class="row"><!--支払方法欄-->
-    <%= form_with model: @order, url: orders_path, local:true do |f| %>
+    <%= form_with model: @order, url: orders_check_path, local:true do |f| %>
     <h4>支払方法</h4>
       <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
-      <%#=ひな型 f.radio_button :プロパティ名(ハッシュの名前としてどういう名前で送りたいか), "送信データ" %>
+      <%#=ひな型 f.radio_button :プロパティ名(キー), "送信データ" %>
       <%= f.label :payment_method, Order.payment_methods_i18n[:credit_card] %>
-      <%#ひな型 f.label :プロパティ名(ハッシュの名前としてどういう名前で送りたいか), "表示する値" %>
+      <%#ひな型 f.label :プロパティ名(キー), "表示する値" %>
 
       <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
       <%= f.label :payment_method, Order.payment_methods_i18n[:transfer] %>
@@ -20,6 +20,10 @@
       郵便番号<%= f.text_field :postal_code %>
       <br>住所<%= f.text_field :address %>
       <br>宛名<%= f.text_field :address_name %>
+
+      <!----既に決まっているデータの送信>
+      <%= f.hidden_field :member_id, value: current_customer.id %><!--ログインユーザーID-->
+      <%= f.hidden_field :postage, value: "300" %><!--送料-->
 
       <%= f.submit '確認画面へ進む', class: "ml-2 btn btn-success" %>
     <% end %>

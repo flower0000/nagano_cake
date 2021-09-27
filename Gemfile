@@ -73,3 +73,6 @@ gem 'font-awesome-sass', '~> 5.13'
 gem 'kaminari','~> 1.2.1'
 
 gem "enum_help"
+
+#デバック用
+gem 'pry-byebug'
