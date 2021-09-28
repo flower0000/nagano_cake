@@ -41,7 +41,10 @@ class CartItemsController < ApplicationController
     #既にあるデータと送られてきたデータを分けるためにこっちの変数に@を付けている．
     #cart_itemはもともと保存してあったデータ側なので間違えずに使用
 
-    if current_customer.cart_items.find_by(item_id: @cart_item.item_id).present?
+    if @cart_item.amount == nil
+      redirect_to item_path(@cart_item.item_id)
+
+    elsif current_customer.cart_items.find_by(item_id: @cart_item.item_id).present?
       #.present?でデータの有無の確認をする．あればtrueでなければfalseを返す。
 
       #current_customerのカートアイテムの全データ（モデル）をfindメソッドを使用して検索。
@@ -53,14 +56,16 @@ class CartItemsController < ApplicationController
       cart_item = current_customer.cart_items.find_by(item_id: @cart_item.item_id)
       #ログインしているユーザーの全カートアイテム情報から，見つけたいデータ(item_id)を指定して、@cart_item.item_id(同じ商品id)を持つデータが無いか検索する．
       #あればそのIDを持つ1レコード分のデータをcart_itemに入れている
-      cart_item.amount += @cart_item.amount.to_i
 
+      cart_item.amount += @cart_item.amount.to_i
       cart_item.save
+
       redirect_to cart_items_path
     else
       @cart_item.save
       redirect_to cart_items_path
     end
+
   end
 
   #ストロングパラメータの設定

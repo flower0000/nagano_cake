@@ -39,7 +39,8 @@
           <%= form_with model: cart_item, url: cart_items_update_path(cart_item.id), local:true do |f| %>
             <%= f.hidden_field :item_id, value: cart_item.item.id %><!--cart_itemモデルに結び付いたアイテムモデルからid情報を取得-->
             <%= f.hidden_field :customer_id, value: current_customer.id %>
-            <%= f.select :amount, *[1..9] %><%= f.submit '保存', class: "ml-2 btn btn-success" %>
+
+            <%= f.select :amount, *[1..50] %><%= f.submit '保存', class: "ml-2 btn btn-success" %>
           <% end %>
         </td>
 
