@@ -62,22 +62,34 @@
   </div>
 
   <div class="row">
-    <h4>支払方法</h4>
-    <%= @order.payment_method, class: "ml-2" %>
+    <h4 class="mr-2">支払方法</h4>
+    <%= @order.payment_method %>
   </div>
 
   <div class="row">
-    <h4>お届け先</h4>
-    <%= @order.address, class: "ml-2" %>
-    <!--何故かclassが付与できないため確認してもらう-->
+    <h4 class="mr-2">お届け先</h4>
+    <%= @order.address %>
+    <!--何故かmr-2が付与できないため確認してもらう-->
+    <!--インライン要素なので付与できない?ためh4タグ側に付与-->
   </div>
 
+<!--送信フォーム用の記述(createアクション遷移用)-->
   <div class="row">
     <div class="col-lg-12 text-center">
-      <%= link_to "注文を確定する", orders_path, method: :post, class: "btn btn-success" %>
+      <%= form_with model: @order, url: orders_path, local:true do |f| %>
+        <%= f.hidden_field :member_id, value: @order.member_id %><!--ログインユーザーID-->
+        <%= f.hidden_field :address, value: @order.address %><!--配送先-->
+        <%= f.hidden_field :postage, value: @order.postage %><!--送料-->
+        <%= f.hidden_field :payment, value: @order.postage + @total %><!--請求金額-->
+        <%= f.hidden_field :payment_method, value: @order.payment_method %><!--送料-->
+        <br><%= f.submit '注文を確定する', class: "mt-2 btn btn-success" %></br>
+      <% end %>
     </div>
   </div>
+<!--フォーム終わり-->
+
 
 </div>
 
 <!--ページを更新すると見たないエラーが出力されるため確認してもらう-->
+<!--リロードはアクションやり直す工程だが，データを送信する工程は実行されない(newアクション)ためエラーが発生する。-->

@@ -7,11 +7,14 @@ class OrdersController < ApplicationController
   def check
     @order = Order.new(order_params)
     #モデルを介するデータのやり取りをする場合は，設定されたカラム以外のデータを入れようとするとエラーが発生する。
-    
+
     @cart_items = current_customer.cart_items#ユーザーの全カートアイテム
+
+
     @total = 0 #@totalを後で使用できるように宣言
 
-    @cart_items.each do |cart_item|#カートアイテムの合計金額
+
+    @cart_items.each do |cart_item|#カートアイテムの合計金額。モデルに記述したメソッドを使用しても良いが今回はこちらでも記述してみる
       @total +=  (cart_item.item.price * 1.1).floor * cart_item.amount
     end
 
@@ -48,7 +51,24 @@ class OrdersController < ApplicationController
 
 
   def create
+    @order = Order.new(order_params)
+    @order.save
 
+    @cart_items = current_customer.cart_items#ユーザーの全カートアイテム
+
+    @cart_items.each do |order_detail|#注文詳細保存用
+      @order_detail = OrderDetail.new
+      #@order_detailOrderDetail.new(item_id: order_detail.item_id, …..)でも大丈夫
+      #OrderDetail.new(保存箇所(カラム): 保存したい値(対応するカラム), …..)
+      @order_detail.item_id = order_detail.item_id#商品ID
+      @order_detail.quantity = order_detail.amount#個数
+      @order_detail.unit_price = order_detail.item.price#価格(cart_itemモデルに紐づいたitemモデルから価格を取得)
+      @order.save
+    end
+
+    @cart_items.destroy_all#カートデータ全削除
+
+    redirect_to thanks_path#購入完了画面へ遷移
   end
 
 
@@ -65,13 +85,16 @@ class OrdersController < ApplicationController
   private
 
     def order_params #メソッド
-      params.require(:order).permit(:payment_method, :postal_code, :address, :address_name, :member_id, :postage)
+      params.require(:order).permit(:payment_method, :postal_code, :address, :address_name, :member_id, :postage, :payment)
       #送られてくるデータで保存する必要があるか無いかでストロングパラメータ内に記述する内容を決める。
       #なので、お届け先のaddress_selectは飛ばす(保存)必要がないため記述しない。ただし，使用は可能なので間違えないように。
 
       #params.require(:order(フォームで受け取ったインスタンス変数がどこのモデルを介しているか))
       #.permit(:payment_method, :postal_code, :address, :address_name, :member_id, :postage)で保存する必要のあるを持たせるカラムを入力。
     end
+
+
+
 
 end
 
