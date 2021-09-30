@@ -1,8 +1,8 @@
 <!--customer側会員情報編集画面-->
 <div class="container">
  <h4>会員情報編集</h4>
- <table class="table table-borderless">
     <%= form_with model: @customer, url: customers_update_path, local:true do |f| %>
+    <table class="table table-borderless">
       <tr>
         <td>
           会員ID
@@ -75,6 +75,11 @@
           <%= f.submit '編集内容を保存', class: "mt-3 mr-1 btn btn-success" %><%= link_to "退会する", customers_check_path, class:"mt-3 btn btn-danger" %>
         </td>
       </tr>
+    </table>
     <% end %>
-  </table>
 </div>
+
+<!--ボタンを押してもエラーも出ない場合は，そもそも機能していない(HTMLの構造がおかしい)ので検証ツールを用いて確認する-->
+<!--formの中にinputがあるかなどを確認する。-->
+<!--tableタグとformは相性が悪い。tableタグはほかの要素と共存できない（入るデータが決まっている(tdなど)）ことがあるため注意-->
+<!--tableタグの中にformがあると不具合が起きるのでtableの外に配置する．文法は間違っていないので注意．-->

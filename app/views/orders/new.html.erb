@@ -23,8 +23,8 @@
       <br>住所<%= f.text_field :address %>
       <br>宛名<%= f.text_field :address_name %>
 
-      <!----既に決まっているデータの送信>
-      <%= f.hidden_field :member_id, value: current_customer.id %><!--ログインユーザーID-->
+      <!--既に決まっているデータの送信-->
+      <%= f.hidden_field :customer_id, value: current_customer.id %><!--ログインユーザーID-->
       <%= f.hidden_field :postage, value: 300 %><!--送料-->
       <%= f.hidden_field :payment, value: 0 %><!--paymentをストロングパラメータに入力できるように仮で値を入力しておく「-->
 
@@ -33,3 +33,5 @@
   </div>
 
 </div>
+
+<!--customer_idをコントローラー側で入れてあげる。後でやる。-->

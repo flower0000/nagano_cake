@@ -1,12 +1,39 @@
 <!--注文履歴一覧-->
 <div class="container">
-  <h4><>
-  
-  
-  
-  
-  
-  
-  
-  
+  <h4>注文履歴一覧</h4>
+  <div class="row">
+    <table class="table table-hover table-bordered ">
+     <thead style="background-color: silver;"><!--表のヘッダー-->
+       <tr>
+        <th class="header1">注文日</th>
+        <th class="header2">配送先</th>
+        <th class="header3">注文商品</th>
+        <th class="header4">支払金額</th>
+        <th class="header5">注文詳細</th>
+       </tr>
+     </thead>
+
+     <tbody>
+      <% @orders.each do |order| %>
+       <tr>
+         <td><%= order.created_at %></td>
+
+         <td><%=order.address %></td>
+
+         <td>
+           <% order.order_details.each do |order_detail| %>
+             <div>
+               <%= order_detail.item.name %>
+             </div>
+           <% end %>
+         </td>
+
+         <td><%= order.payment %></td>
+         <td><%= link_to "注文詳細", orders_path, class:"btn btn-primary" %></td>
+       </tr>
+      <% end %>
+
+     </tbody>
+   </table>
+  </div>
 </div>

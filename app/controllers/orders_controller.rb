@@ -27,7 +27,7 @@ class OrdersController < ApplicationController
 
        @order.postal_code = current_customer.postal_code
        @order.address = current_customer.address
-       @order.address_name = current_customer.first_name + current_customer.last_name
+       @order.address_name = current_customer.last_name + current_customer.first_name
        #current_customerの情報を入れていく。formに値が入っていたとしてもログインユーザーの情報が入るよう設定。
 
 
@@ -52,6 +52,7 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
+
     @order.save
 
     @cart_items = current_customer.cart_items#ユーザーの全カートアイテム
@@ -60,10 +61,14 @@ class OrdersController < ApplicationController
       @order_detail = OrderDetail.new
       #@order_detailOrderDetail.new(item_id: order_detail.item_id, …..)でも大丈夫
       #OrderDetail.new(保存箇所(カラム): 保存したい値(対応するカラム), …..)
+
+      @order_detail.order_id = @order.id#注文ID
+      #アソシエーションを組む際は外部キーは必須なので意識する
       @order_detail.item_id = order_detail.item_id#商品ID
       @order_detail.quantity = order_detail.amount#個数
       @order_detail.unit_price = order_detail.item.price#価格(cart_itemモデルに紐づいたitemモデルから価格を取得)
-      @order.save
+
+      @order_detail.save!
     end
 
     @cart_items.destroy_all#カートデータ全削除
@@ -73,6 +78,7 @@ class OrdersController < ApplicationController
 
 
   def index
+    @orders = current_customer.orders #全注文データ
 
   end
 
@@ -85,12 +91,13 @@ class OrdersController < ApplicationController
   private
 
     def order_params #メソッド
-      params.require(:order).permit(:payment_method, :postal_code, :address, :address_name, :member_id, :postage, :payment)
+      params.require(:order).permit(:payment_method, :postal_code, :address, :address_name, :customer_id, :postage, :payment)
       #送られてくるデータで保存する必要があるか無いかでストロングパラメータ内に記述する内容を決める。
       #なので、お届け先のaddress_selectは飛ばす(保存)必要がないため記述しない。ただし，使用は可能なので間違えないように。
 
       #params.require(:order(フォームで受け取ったインスタンス変数がどこのモデルを介しているか))
-      #.permit(:payment_method, :postal_code, :address, :address_name, :member_id, :postage)で保存する必要のあるを持たせるカラムを入力。
+      #.permit(:payment_method, :postal_code, :address, :address_name, :customer_id, :postage)で保存する必要のあるを持たせるカラムを入力。
+      #ユーザーが入力する値以外が送信しない．例:customer_id
     end
 
 
