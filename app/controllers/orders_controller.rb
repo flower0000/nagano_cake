@@ -84,6 +84,10 @@ class OrdersController < ApplicationController
 
 
   def show
+    @order_details = Orderdetail.find_by(order_id: order.id)
+    #Oredr_detailモデル内のorder_idカラムの値の中でindexアクションから渡ってきたidと同じ値を持つデータを取得する．
+    
+    #小計などの計算をここでしてしまう
 
   end
 
