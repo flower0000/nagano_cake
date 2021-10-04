@@ -10,7 +10,7 @@
 
   <div class="row">
     <div class="col-lg-4 mx-auto">
-      <%= link_to "退会しない", root_path, class: "mt-3 mr-3 btn btn-primary" %><%= link_to "退会する", withdrawal_path, method: :patch, class: "mt-3 btn btn-danger" %>
+      <%= link_to "退会しない", root_path, class: "mt-3 mr-3 btn btn-primary" %><%= link_to "退会する", withdrawal_path, method: :patch, "data-confirm" => "本当に退会しますか？", class: "mt-3 btn btn-danger" %>
     </div>
   </div>
 

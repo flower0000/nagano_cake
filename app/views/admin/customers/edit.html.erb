@@ -1,8 +1,8 @@
 <!--ユーザー情報編集画面-->
 <div class="container">
   <h4><%= @customer.last_name %><%= @customer.first_name %>の会員詳細</h4>
-  <table class="table table-borderless">
-    <%= form_with model: @customer, url: admin_customer_path(@customer.id), local:true do |f| %>
+  <%= form_with model: @customer, url: admin_customer_path(@customer.id), local:true do |f| %>
+    <table class="table table-borderless">
       <tr>
         <td>
           会員ID
@@ -68,10 +68,29 @@
 
       <tr>
         <td>
+          会員ステータス
+        </td>
+        <td>
+          <!--選択して編集するにはどうする？-->
+          <%= f.radio_button :is_active, :kari %>
+          <!--メソッドを経由せずに文字列を送信データとして使用したい場合は　:文字　または　'文字'　で使用する。-->
+          <%= f.label :is_active, Customer.is_actives_i18n[:kari] %>
+          <!--ラジオボタンは値が入っている場合，同じ単語であればチェックが入る-->
+
+          <%= f.radio_button :is_active, :withdrawal %>
+          <%= f.label :is_active, Customer.is_actives_i18n[:withdrawal] %>
+          <!--kariとwithdrawalが送信される場合(dbに保存するとき)、モデルを経由してdbに値が渡った瞬間にenumの変換機能がなくなるのでkari→true,withdrawal→falseとして保存される-->
+        </td>
+      </tr>
+
+      <tr>
+        <td>
           <%= f.submit '変更を保存', class: "mt-3 btn btn-success" %>
         </td>
       </tr>
-    <% end %>
-  </table>
-
+    </table>
+  <% end %>
 </div>
+
+<!--Rails ターボリンクス　オフ　この内容を後で調べる-->
+<!--submitがうまくいかない-->

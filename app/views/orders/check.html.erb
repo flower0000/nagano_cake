@@ -68,7 +68,7 @@
 
   <div class="row">
     <h4 class="mr-2">お届け先</h4>
-    <%= @order.postal_code %><%= @order.address %><%= @order.address_name %>
+    〒<%= @order.postal_code %><%= @order.address %><%= @order.address_name %>
     <!--何故かmr-2が付与できないため確認してもらう-->
     <!--インライン要素なので付与できない?ためh4タグ側に付与-->
   </div>
@@ -79,6 +79,8 @@
       <%= form_with model: @order, url: orders_path, local:true do |f| %>
         <%= f.hidden_field :customer_id, value: @order.customer_id %><!--ログインユーザーID-->
         <%= f.hidden_field :address, value: @order.address %><!--配送先-->
+        <%= f.hidden_field :postal_code, value: @order.postal_code %><!--郵便番号-->
+        <%= f.hidden_field :address_name, value: @order.address_name %><!--宛名-->
         <%= f.hidden_field :postage, value: @order.postage %><!--送料-->
         <%= f.hidden_field :payment, value: @order.postage + @total %><!--請求金額-->
         <%= f.hidden_field :payment_method, value: @order.payment_method %><!--送料-->

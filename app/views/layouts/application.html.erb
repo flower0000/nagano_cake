@@ -23,7 +23,8 @@
       <%= link_to "LOGO", root_path, class:"navbar-brand p-8 text-dark" %>
       <!--navbar-brandはサイト名を作成するときに使用するclass。左上に配置される感じ？-->
 
-       <% if customer_signed_in? %>
+      <% if customer_signed_in? %>
+        <div class="ml-5">ようこそ、<%= current_customer.last_name %>さん!</div>
         <ul class="navbar-nav ml-auto list-unstyled">
   <!--listタグの点（リストマーカー）を削除するにはlist-unstyledを追加する-->
   <!--mb-3でmarginのbottom部に3の大きさの隙間が入る感じ-->

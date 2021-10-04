@@ -15,14 +15,15 @@
 
      <tbody>
        <tr>
-        <td><%= @order_details.order.created_at %></td><!--注文作成日-->
-        <td>〒<%= @order_details.order.postal_code %><%= @order_details.order.address %><%= @order_details.order.address_name %></td><!--配送先-->
-        <td><%= @order_details.order.payment_method %></td><!--支払方法-->
+        <td><%= @order.created_at %></td><!--注文作成日-->
+        <!--whereでデータを受け取った場合，@order_detailsから値を取得するときは@order_details[0].order.カラム名でも良い。配列でできることは大体できる．-->
+        <td>〒<%= @order.postal_code %><%= @order.address %><%= @order.address_name %></td><!--配送先-->
+        <td><%= @order.payment_method %></td><!--支払方法-->
        </tr>
      </tbody>
    </table>
    </div>
-  
+
     <div class="col-lg-3">
     <h4>請求情報</h4>
     <table class="table table-hover table-bordered ">
@@ -36,18 +37,37 @@
 
      <tbody>
        <tr>
-        <td></td><!--商品合計-->
-        <td></td><!--配送料-->
-        <td></td><!--ご請求額-->
+        <td><%= @total %></td><!--商品合計-->
+        <td><%= @order.postage %></td><!--配送料-->
+        <td><%= @total + @order.postage %></td><!--ご請求額-->
        </tr>
      </tbody>
     </table>
     </div>
-  <>
-  
-  
-  
-  
-  
-  
+   </div>
+
+   <div class="row">
+    <h4>注文内容</h4>
+    <table class="table table-hover table-bordered ">
+     <thead style="background-color: silver;"><!--表のヘッダー-->
+       <tr>
+        <th class="header1">商品</th>
+        <th class="header2">単価(税込み)</th>
+        <th class="header3">個数</th>
+        <th class="header4">小計</th>
+       </tr>
+     </thead>
+
+     <tbody>
+       <% @order_details.each do |order_detail| %>
+         <tr>
+          <td><%= order_detail.item.name %></td><!--商品-->
+          <td><%= (order_detail.unit_price * 1.1).floor %></td><!--単価(税込み)-->
+          <td><%= order_detail.quantity %></td><!--個数-->
+          <td><%= (order_detail.unit_price * 1.1).floor * order_detail.quantity %></td><!--小計-->
+        </tr>
+       <% end %>
+     </tbody>
+   </table>
+  </div>
 </div>

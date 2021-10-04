@@ -65,6 +65,18 @@
       </td>
     </tr>
 
+    <tr>
+      <td>
+        会員ステータス
+      </td>
+      <td>
+        <% if @customer.is_active == "kari" %>
+          <div class="text-success">有効</div>
+        <% else %>
+          <div class="text-danger">退会</div>
+        <% end %>
+      </td>
+    </tr>
 
   </table>
 
@@ -75,7 +87,7 @@
     </div>
 
     <div class="col-lg-3">
-      <%= link_to "注文履歴一覧を見る", admin_path, class: "mt-3 btn btn-primary" %>
+      <%= link_to "注文履歴一覧を見る", admin_root_path, class: "mt-3 btn btn-primary" %>
   　</div>
 
   </div>

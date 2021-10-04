@@ -84,10 +84,21 @@ class OrdersController < ApplicationController
 
 
   def show
-    @order_details = Orderdetail.find_by(order_id: order.id)
-    #Oredr_detailモデル内のorder_idカラムの値の中でindexアクションから渡ってきたidと同じ値を持つデータを取得する．
     
-    #小計などの計算をここでしてしまう
+    @order = Order.find(params[:id])#注文データ取得
+    
+    @order_details = OrderDetail.where(order_id: params[:id])
+    #該当するデータを持つデータの全取得
+
+    #linkでもparamerters飛ばしてるので，link_toで飛ばしてきたidをparams[:id]で使用する
+    #idのみだと変数のidを探しに行こうとしてしまい，機能しない
+    #Oredr_detailモデル内のorder_idカラムの値の中でindexアクションから渡ってきたidと同じ値を持つデータを取得する．
+
+    @total = 0
+    @order_details.each do |order_detail|#商品合計
+      @total +=  (order_detail.unit_price * 1.1).floor * order_detail.quantity
+    end
+
 
   end
 

@@ -7,10 +7,16 @@ ja:
         transfer: '銀行振込'
 
 #様式を下記に記載
-# ja.yml
+# ja.yml(ファイルに記述)
 #ja: # 日本語の設定を行う
   #enums: # enumの設定を行う
     #[モデル名]:
       #[カラム名]:
         #[enumで番号と紐付けた要素]:
         #[enumで番号と紐付けた要素]: 要素の数だけ追加する
+ja:
+  enums:
+    customer:
+      is_active:
+        kari: '有効'
+        withdrawal: '退会'
