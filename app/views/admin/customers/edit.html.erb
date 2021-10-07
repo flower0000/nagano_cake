@@ -71,14 +71,17 @@
           会員ステータス
         </td>
         <td>
+          <%= @customer.is_active %>
           <!--選択して編集するにはどうする？-->
-          <%= f.radio_button :is_active, :kari %>
-          <!--メソッドを経由せずに文字列を送信データとして使用したい場合は　:文字　または　'文字'　で使用する。-->
-          <%= f.label :is_active, Customer.is_actives_i18n[:kari] %>
+          <%= f.radio_button :is_active, :true %>
+          <!--メソッドを経由せずに文字列を送信データとして使用したい場合は:文字で使用する。-->
+          <%= f.label :is_active, "有効" %>
           <!--ラジオボタンは値が入っている場合，同じ単語であればチェックが入る-->
 
-          <%= f.radio_button :is_active, :withdrawal %>
-          <%= f.label :is_active, Customer.is_actives_i18n[:withdrawal] %>
+          <%= f.radio_button :is_active, :false %>
+          <%= f.label :is_active, "退会" %>
+
+          <!--enum使用時の仕様-->
           <!--kariとwithdrawalが送信される場合(dbに保存するとき)、モデルを経由してdbに値が渡った瞬間にenumの変換機能がなくなるのでkari→true,withdrawal→falseとして保存される-->
         </td>
       </tr>

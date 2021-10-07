@@ -14,9 +14,4 @@ ja:
       #[カラム名]:
         #[enumで番号と紐付けた要素]:
         #[enumで番号と紐付けた要素]: 要素の数だけ追加する
-ja:
-  enums:
-    customer:
-      is_active:
-        kari: '有効'
-        withdrawal: '退会'
+
